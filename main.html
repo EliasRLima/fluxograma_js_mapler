@@ -2,13 +2,19 @@
 <html>
 <header>
     <link rel="stylesheet" href="elementos.css">
+    <link rel="stylesheet" href="pagina.css">
+    <script src="functions.js"></script>
 </header>
 
 <body>
-    <div class="draggable bloco"></div>
-    <div class="draggable bloco"></div>
+    <div class="linha">
+        <div class="coluna-20 vermelho">
+            <button onclick="novoElemento()">Adicionar elemento</button>
+        </div>
+        <div class="coluna-80 cinza" id="areaFiguras">
+        </div>
+    </div>
 
-    <script src="eventos.js"></script>
 </body>
 
 </html>

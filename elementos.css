@@ -32,3 +32,11 @@ html, body {
     transform: scale(1.1);
     z-index: 999;
   }
+
+  .azul{
+    background-color: aquamarine;
+  }
+
+  .amarelo{
+    background-color: darkgoldenrod;
+  }

@@ -1,0 +1,23 @@
+.linha{
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
+    }
+
+.coluna-80 {
+    width: 80%;
+}
+
+.coluna-20 {
+    width: 20%;
+}
+
+.vermelho{
+    background-color: brown;
+    color: azure;
+}
+
+.cinza{
+    background-color: dimgrey;
+    color: black;
+}
