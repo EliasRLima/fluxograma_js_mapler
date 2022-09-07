@@ -7,10 +7,10 @@ function novoElemento(){
     
     var area = document.getElementById("areaFiguras")
     area.appendChild(div)
-    mover()
+    mover(div)
 }
 
-function mover(){
+function mover(elemento){
     var Draggable = function (elemento) {
       var that = this;
       this.elemento = elemento;
@@ -18,6 +18,7 @@ function mover(){
       this.posY = 0;
       this.top = 0;
       this.left = 0;
+      
       this.refMouseUp = function (event) {
         that.onMouseUp(event);
       }
@@ -55,9 +56,6 @@ function mover(){
       window.removeEventListener("mouseup", this.refMouseUp);  
     }
     
-    var draggables = document.querySelectorAll(".draggable");
-    [].forEach.call(draggables, function (draggable, indice) {
-      new Draggable(draggable);
-    });
+    new Draggable(elemento);
   }
   
