@@ -1,16 +1,53 @@
+var mouse = 'mover'
+
+
+function ativarAdicionar(){
+  this.mouse = 'mover'
+  novoElemento()
+}
+
+function ativarRemover(){
+   this.mouse = 'remover'
+}
+
+
+
+function ligarFuncoesFigura(figura){
+  moverElemento(figura)
+  removerElemento(figura)
+}
+
 
 function novoElemento(){
     var div = document.createElement("div")
     div.classList.add("draggable")
     div.classList.add("bloco")
     div.classList.add("azul")
-    
     var area = document.getElementById("areaFiguras")
     area.appendChild(div)
-    mover(div)
+    ligarFuncoesFigura(div)
 }
 
-function mover(elemento){
+function removerElemento(elemento){
+  var Remove = function (elemento) {
+     var that = this
+     this.elemento = elemento
+     this.elemento.addEventListener("click", function (event) {
+       that.onClick(event)
+     })
+  }
+
+  Remove.prototype.onClick = function (event){
+    if(this.mouse == 'remover'){
+      console.log('alo?')
+    }
+       
+  }
+
+  new Remove(elemento)
+}
+
+function moverElemento(elemento){
     var Draggable = function (elemento) {
       var that = this;
       this.elemento = elemento;
