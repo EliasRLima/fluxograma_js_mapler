@@ -3,29 +3,63 @@ var mouse = 'mover'
 
 function ativarAdicionar(){
   this.mouse = 'mover'
-  novoElemento()
+
 }
 
 function ativarRemover(){
    this.mouse = 'remover'
+
 }
 
 function getMouseStatus(){
    return this.mouse
 }
+
 function ligarFuncoesFigura(figura){
   moverElemento(figura)
   removerElemento(figura)
 }
 
-function novoElemento(){
-    var div = document.createElement("div")
-    div.classList.add("draggable")
-    div.classList.add("bloco")
-    div.classList.add("azul")
+function novaFigura(){
+  var div = document.createElement("div")
+  div.classList.add("draggable")
+  return div
+}
+
+function novoElemento(div){
     var area = document.getElementById("areaFiguras")
     area.appendChild(div)
     ligarFuncoesFigura(div)
+}
+
+function novoInicio(){
+  div = novaFigura()
+  div.classList.add("inicio")
+  novoElemento(div)
+}
+
+function novoFim(){
+  div = novaFigura()
+  div.classList.add("fim")
+  novoElemento(div)
+}
+
+function novoEntrada(){
+  div = novaFigura()
+  div.classList.add("entrada")
+  novoElemento(div)
+}
+
+function novoDecisao(){
+  div = novaFigura()
+  div.classList.add("decisao")
+  novoElemento(div)
+}
+
+function novoProcessamento(){
+  div = novaFigura()
+  div.classList.add("processamento")
+  novoElemento(div)
 }
 
 function removerElemento(elemento){
@@ -41,7 +75,7 @@ function removerElemento(elemento){
       var area = document.getElementById("areaFiguras")
       area.removeChild(this.elemento)
     }
-    
+
   }
 
   new Remove(elemento)

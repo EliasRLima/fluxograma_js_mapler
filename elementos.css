@@ -40,3 +40,55 @@ html, body {
   .amarelo{
     background-color: darkgoldenrod;
   }
+
+  .inicio {
+    background-color: transparent;
+    border-radius: 50%;
+    border-color: black;
+    border-style: solid;
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+  }
+
+  .fim {
+    background-color: black;
+    border-radius: 50%;
+    border-color: black;
+    border-style: solid;
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+  }
+
+  .entrada {
+    background-color: transparent;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 50% 10% 50% 10%;
+    width: 120px;
+    height: 80px;
+  }
+
+  .decisao {
+    background-color: transparent;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    transform: rotate(45deg);
+    width: 80px;
+    height: 80px;
+  }
+
+  .processamento {
+    background-color: transparent;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    width: 120px;
+    height: 80px;
+  }
+
+  
+
