@@ -10,13 +10,13 @@ function ativarRemover(){
    this.mouse = 'remover'
 }
 
-
-
+function getMouseStatus(){
+   return this.mouse
+}
 function ligarFuncoesFigura(figura){
   moverElemento(figura)
   removerElemento(figura)
 }
-
 
 function novoElemento(){
     var div = document.createElement("div")
@@ -29,19 +29,19 @@ function novoElemento(){
 }
 
 function removerElemento(elemento){
+
   var Remove = function (elemento) {
      var that = this
      this.elemento = elemento
-     this.elemento.addEventListener("click", function (event) {
-       that.onClick(event)
-     })
+     this.elemento.addEventListener("click", function (event) { that.onClick(event) })
   }
 
   Remove.prototype.onClick = function (event){
-    if(this.mouse == 'remover'){
-      console.log('alo?')
+    if (getMouseStatus() == 'remover'){
+      var area = document.getElementById("areaFiguras")
+      area.removeChild(this.elemento)
     }
-       
+    
   }
 
   new Remove(elemento)
