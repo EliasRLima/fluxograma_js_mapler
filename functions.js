@@ -1,13 +1,23 @@
 var mouse = 'mover'
+var fluxograma = []
+var figuraInicio = 'nenhuma'
 
 
 function ativarAdicionar(){
   this.mouse = 'mover'
+  zerarAssociacoes()
 
 }
 
 function ativarRemover(){
    this.mouse = 'remover'
+   zerarAssociacoes()
+
+}
+
+function ativarAssociar(){
+  this.mouse = 'associar'
+  zerarAssociacoes()
 
 }
 
@@ -15,70 +25,38 @@ function getMouseStatus(){
    return this.mouse
 }
 
-function ligarFuncoesFigura(figura){
-  moverElemento(figura)
-  removerElemento(figura)
+function zerarAssociacoes(){
+   figuraInicio = 'nenhuma'
 }
 
-function novaFigura(){
-  var div = document.createElement("div")
-  div.classList.add("draggable")
-  return div
-}
+function clickElemento(elemento){
 
-function novoElemento(div){
-    var area = document.getElementById("areaFiguras")
-    area.appendChild(div)
-    ligarFuncoesFigura(div)
-}
-
-function novoInicio(){
-  div = novaFigura()
-  div.classList.add("inicio")
-  novoElemento(div)
-}
-
-function novoFim(){
-  div = novaFigura()
-  div.classList.add("fim")
-  novoElemento(div)
-}
-
-function novoEntrada(){
-  div = novaFigura()
-  div.classList.add("entrada")
-  novoElemento(div)
-}
-
-function novoDecisao(){
-  div = novaFigura()
-  div.classList.add("decisao")
-  novoElemento(div)
-}
-
-function novoProcessamento(){
-  div = novaFigura()
-  div.classList.add("processamento")
-  novoElemento(div)
-}
-
-function removerElemento(elemento){
-
-  var Remove = function (elemento) {
+  var Evento = function (elemento) {
      var that = this
      this.elemento = elemento
      this.elemento.addEventListener("click", function (event) { that.onClick(event) })
   }
 
-  Remove.prototype.onClick = function (event){
+  Evento.prototype.onClick = function (event){
+    //evento de remover
     if (getMouseStatus() == 'remover'){
       var area = document.getElementById("areaFiguras")
       area.removeChild(this.elemento)
     }
+    //evento de associar
+    if(getMouseStatus() == 'associar'){
+      if(figuraInicio == 'nenhuma'){
+        figuraInicio = elemento
+      }else if(figuraInicio != elemento){
+        fluxograma[fluxograma.length] = {figuraDoInicio: figuraInicio, figuraDoFim: elemento}
+        figuraInicio = 'nenhuma'
+        console.log(fluxograma)
+      }
+    }
 
   }
 
-  new Remove(elemento)
+  new Evento(elemento)
 }
 
 function moverElemento(elemento){
@@ -130,3 +108,52 @@ function moverElemento(elemento){
     new Draggable(elemento);
   }
   
+
+function ligarFuncoesFigura(figura){
+  moverElemento(figura)
+  clickElemento(figura)
+}
+
+function novaFigura(){
+  var div = document.createElement("div")
+  div.classList.add("draggable")
+  return div
+}
+
+function novoElemento(div){
+    var area = document.getElementById("areaFiguras")
+    area.appendChild(div)
+    ligarFuncoesFigura(div)
+}
+
+function novoInicio(){
+  div = novaFigura()
+  div.classList.add("inicio")
+  novoElemento(div)
+}
+
+function novoFim(){
+  div = novaFigura()
+  div.classList.add("fim")
+  novoElemento(div)
+}
+
+function novoEntrada(){
+  div = novaFigura()
+  div.classList.add("entrada")
+  novoElemento(div)
+}
+
+function novoDecisao(){
+  div = novaFigura()
+  div.classList.add("decisao")
+  novoElemento(div)
+}
+
+function novoProcessamento(){
+  div = novaFigura()
+  div.classList.add("processamento")
+  novoElemento(div)
+}
+
+
