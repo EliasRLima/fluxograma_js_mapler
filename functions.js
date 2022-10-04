@@ -35,6 +35,7 @@ function criarLinha(elemento1, elemento2){
   var area = document.getElementById("areaFiguras")
   area.appendChild(line)
   ajustarLinha(elemento1, elemento2, line)
+  return line
 }
 
 function ajustarLinha(from, to, line){
@@ -88,14 +89,20 @@ function clickElemento(elemento){
     if (getMouseStatus() == 'remover'){
       var area = document.getElementById("areaFiguras")
       area.removeChild(this.elemento)
+      fluxograma.forEach( element => {
+        if(element.figuraDoInicio == this.elemento || element.figuraDoFim == this.elemento){
+          area.removeChild(element.linha)
+        }
+      }) 
+      fluxograma = fluxograma.filter( (element) => element.figuraDoInicio != this.elemento && element.figuraDoFim != this.elemento)
     }
     //evento de associar
     if(getMouseStatus() == 'associar'){
       if(figuraInicio == 'nenhuma'){
         figuraInicio = elemento
       }else if(figuraInicio != elemento){
-        fluxograma[fluxograma.length] = {figuraDoInicio: figuraInicio, figuraDoFim: elemento}
-        criarLinha(figuraInicio, elemento)
+        linha = criarLinha(figuraInicio, elemento)
+        fluxograma[fluxograma.length] = {figuraDoInicio: figuraInicio, figuraDoFim: elemento, linha: linha}
         figuraInicio = 'nenhuma'
         console.log(fluxograma)
       }
@@ -142,6 +149,14 @@ function moverElemento(elemento){
       var diffY = event.y - this.posY;
       this.elemento.style.top = (this.top + diffY) + "px";
       this.elemento.style.left = (this.left + diffX) + "px";
+
+      associacoes = fluxograma.filter((element) => element.figuraDoInicio == elemento || element.figuraDoFim == elemento)
+      if(associacoes.length > 0){
+        associacoes.forEach(element => {
+          ajustarLinha(element.figuraDoInicio, element.figuraDoFim, element.linha)
+        });
+      }
+      
     }
     
     Draggable.prototype.onMouseUp = function (event) {
