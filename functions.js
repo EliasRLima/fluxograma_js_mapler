@@ -1,8 +1,10 @@
+//refatorar para varios arquivos
+
 var mouse = 'mover'
 var fluxograma = []
 var figuraInicio = 'nenhuma'
 
-
+//funcoes menu
 function ativarAdicionar(){
   this.mouse = 'mover'
   zerarAssociacoes()
@@ -29,6 +31,24 @@ function zerarAssociacoes(){
    figuraInicio = 'nenhuma'
 }
 
+//regras de negocio
+function impedirDuplicarInicio(){
+  var inicio = document.getElementsByClassName("inicio")
+  if(inicio.length > 0){
+    return true
+  }
+  return false
+}
+
+function impedirDuplicarFim(){
+  var inicio = document.getElementsByClassName("fim")
+  if(inicio.length > 0){
+    return true
+  }
+  return false
+}
+
+//funcoes linha
 function criarLinha(elemento1, elemento2){
   var line = document.createElement("div")
   line.classList.add("ligacao")
@@ -76,6 +96,7 @@ function ajustarLinha(from, to, line){
   line.style.height = H + 'px';
 }
 
+//eventos figuras
 function clickElemento(elemento){
 
   var Evento = function (elemento) {
@@ -170,6 +191,7 @@ function moverElemento(elemento){
     new Draggable(elemento);
   }
   
+//criar figuras
 
 function ligarFuncoesFigura(figura){
   moverElemento(figura)
@@ -189,12 +211,22 @@ function novoElemento(div){
 }
 
 function novoInicio(){
+  let bloquear = impedirDuplicarInicio()
+  if(bloquear){
+    alert('Permitido apenas um inicio no fluxograma.')
+    return
+  }
   div = novaFigura()
   div.classList.add("inicio")
   novoElemento(div)
 }
 
 function novoFim(){
+  let bloquear = impedirDuplicarFim()
+  if(bloquear){
+    alert('Permitido apenas um fim no fluxograma.')
+    return
+  }
   div = novaFigura()
   div.classList.add("fim")
   novoElemento(div)
@@ -203,6 +235,12 @@ function novoFim(){
 function novoEntrada(){
   div = novaFigura()
   div.classList.add("entrada")
+  novoElemento(div)
+}
+
+function novoSaida(){
+  div = novaFigura()
+  div.classList.add("saida")
   novoElemento(div)
 }
 

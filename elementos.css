@@ -42,9 +42,9 @@ html, body {
   }
 
   .inicio {
-    background-color: transparent;
+    background-color: black;
     border-radius: 50%;
-    border-color: black;
+    border-color: lightgreen;
     border-style: solid;
     width: 24px;
     height: 24px;
@@ -54,7 +54,7 @@ html, body {
   .fim {
     background-color: black;
     border-radius: 50%;
-    border-color: black;
+    border-color: crimson;
     border-style: solid;
     width: 24px;
     height: 24px;
@@ -62,7 +62,7 @@ html, body {
   }
 
   .entrada {
-    background-color: transparent;
+    background-color: black;
     border-width: 3px;
     border-style: solid;
     border-color: black;
@@ -71,23 +71,59 @@ html, body {
     height: 80px;
   }
 
+
+  .saida {
+    position: relative;
+    width: 100px;
+    height: 75px;
+    margin: 10px 0;
+    background: black;
+    border-color: black;
+    border-width: 3px;
+    border-radius: 50% / 10%;
+    color: white;
+    text-align: center;
+    text-indent: .1em;
+  }
+  .saida:before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    right: -5%;
+    left: -5%;
+    background: inherit;
+    border-radius: 5% / 50%;
+  }
+
   .decisao {
-    background-color: transparent;
+    background-color: black;
     border-width: 3px;
     border-style: solid;
-    border-color: black;
+    border-color:  black red green black;
     transform: rotate(45deg);
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
   }
 
   .processamento {
-    background-color: transparent;
-    border-width: 3px;
+    position: relative;
+    width: 54px;
+    box-sizing: content-box;
+    border-width: 50px 18px 0;
     border-style: solid;
-    border-color: black;
-    width: 120px;
-    height: 80px;
+    border-color: black transparent;
+  }
+  .processamento:before {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -85px;
+    left: -18px;
+    border-width: 0 45px 35px;
+    border-style: solid;
+    border-color: transparent transparent black;
   }
 
   .ligacao{
