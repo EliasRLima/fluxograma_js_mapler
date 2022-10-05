@@ -48,6 +48,26 @@ function impedirDuplicarFim(){
   return false
 }
 
+function numeroDeCaminhosParaFrente(elemento){
+  return fluxograma.filter( (element) => element.figuraDoInicio == elemento).length
+}
+
+function impedirNovoCaminhoFiguraComum(elemento){
+   var caminhos = numeroDeCaminhosParaFrente(elemento)
+   if(caminhos > 0){
+    return true
+   }
+   return false
+}
+
+function impedirNovoCaminhoFiguraDecisao(elemento){
+  var caminhos = numeroDeCaminhosParaFrente(elemento)
+  if(caminhos > 1){
+   return true
+  }
+  return false
+}
+
 //funcoes linha
 function criarLinha(elemento1, elemento2){
   var line = document.createElement("div")
@@ -120,6 +140,17 @@ function clickElemento(elemento){
     //evento de associar
     if(getMouseStatus() == 'associar'){
       if(figuraInicio == 'nenhuma'){
+        if(elemento.classList.contains('decisao')){
+          if(impedirNovoCaminhoFiguraDecisao(elemento)){
+            alert('A decisao ja esta com dois caminhos.')
+            return
+          }
+        }else{
+          if(impedirNovoCaminhoFiguraComum(elemento)){
+            alert('Desta figura so pode partir um caminho.')
+            return
+          }
+        }
         figuraInicio = elemento
       }else if(figuraInicio != elemento){
         linha = criarLinha(figuraInicio, elemento)
